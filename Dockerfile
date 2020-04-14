@@ -7,4 +7,4 @@ RUN pip install -r ./requirements.txt
 
 ADD . .
 
-CMD "[python", "./main.py"]
+CMD ["python3.8", "./main.py"]
