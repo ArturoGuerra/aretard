@@ -1,4 +1,4 @@
-from bot import Plugin, command
+from bot import Plugin, command, guild_only
 from random import seed, randint
 seed(1)
 
@@ -29,6 +29,7 @@ class Aretard(Plugin):
         except: pass
 
     @command(name="kickme")
+    @guild_only
     async def kickme(self, ctx):
         try:
             await ctx.author.kick()
