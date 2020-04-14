@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: aretard
+    labels:
+        app: aretard
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: aretard
+    template:
+        metadata:
+            name: aretard
+            labels:
+                app: aretard
+        spec:
+            containers:
+                - name: aretard
+                  image: arturoguerra/aretard
+                  env:
+                    - name: TOKEN
+                      valueFrom:
+                        secretKeyRef:
+                            name: aretard
+                            key: token
