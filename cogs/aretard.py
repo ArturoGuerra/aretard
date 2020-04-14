@@ -22,14 +22,14 @@ class Aretard(Plugin):
            await ctx.send("https://tenor.com/view/backflip-back-flip-gif-5547677")
         except: pass
 
-    @command(name="chromie")
+@command(name="chromie")
     async def chromie(self, ctx):
         try:
            await ctx.send("https://i.arturonet.com/bestvideoever.mp4")
         except: pass
 
     @command(name="kickme")
-    @guild_only
+    @guild_only()
     async def kickme(self, ctx):
         try:
             await ctx.author.kick()
