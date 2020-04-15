@@ -19,6 +19,16 @@ spec:
                 - name: aretard
                   image: arturoguerra/aretard
                   env:
+                    - name: PYTHONUNBUFFERED
+                      value: "1"
+                    - name: LAVALINK_HOST
+                      value: lavalink
+                    - name: LAVALINK_PORT
+                      value: "2333"
+                    - name: LAVALINK_URI
+                      value: "http://lavalink:2333"
+                    - name: LAVALINK_PASSWORD
+                      value: "mebigboi"
                     - name: TOKEN
                       valueFrom:
                         secretKeyRef:

@@ -13,7 +13,13 @@ class Aretard(Plugin):
     @command(name="optimus")
     async def optimus(self, ctx):
         try:
-            await ctx.send("https://tenor.com/view/backflip-back-flip-gif-5547677")
+            await ctx.send("https://i.arturonet.com/DTH1pTMnNy.gif")
+        except: pass
+
+    @command(name="optimus2")
+    async def optimus2(self, ctx):
+        try:
+            await ctx.send("https://media.discordapp.net/attachments/296056831514509312/680099251258130447/carmechanic.mp4")
         except: pass
     
     @command(name="flips")
@@ -34,6 +40,13 @@ class Aretard(Plugin):
         try:
             await ctx.author.kick()
         except: pass
+
+    @command(name="rhetard")
+    async def rhetard(self, ctx):
+        try:
+            await ctx.send("https://media.discordapp.net/attachments/296056831514509312/699777948575727656/video0.mp4")
+        except: pass
+
 
     @command(name="random")
     async def random(self, ctx):

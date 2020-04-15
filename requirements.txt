@@ -14,6 +14,7 @@ pylint==2.4.4
 six==1.14.0
 Unidecode==1.1.1
 uvloop==0.14.0
+wavelink==0.6.0
 websockets==8.1
 wrapt==1.11.2
 yarl==1.4.2
