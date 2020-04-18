@@ -11,7 +11,7 @@ class Voice(Plugin):
         
         return f"ytsearch:{query}"
 
-    @command(name="connect")
+    @command(name="connect", aliases=["join"])
     @guild_only()
     async def connect_(self, ctx, channel: discord.VoiceChannel=None):
         if not channel:
@@ -27,7 +27,7 @@ class Voice(Plugin):
             print(e)
             self.bot.logger.error(e)
 
-    @command(name="play")
+    @command(name="play", aliases=["p"])
     @guild_only()
     async def play(self, ctx, *, query: str):
         if query is None:
@@ -88,7 +88,7 @@ class Voice(Plugin):
             await player.set_pause(playing)
             await ctx.send(f"Paused/Unpaused player")
         except Exception as e:
-            print(e)
+            self.bot.logger.error(e)
 
     @command(name="vol", aliases=['volume'])
     @guild_only()
@@ -102,6 +102,15 @@ class Voice(Plugin):
             await player.set_volume(vol)
             await ctx.send(f"Set volume to {vol}")
         except Exception as e:
-            print(e)
+            self.bot.logger.error(e)
+
+    @command(name="ree")
+    @guild_only()
+    async def ree(self, ctx):
+        try:
+            await self.play(ctx, query = "reee")
+        except Exception as e:
+            self.logger.error(e)
+        
             
 

@@ -5,3 +5,4 @@ from discord.ext.commands import Cog
 class Plugin(Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.logger = bot.logger

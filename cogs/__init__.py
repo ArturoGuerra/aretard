@@ -8,4 +8,5 @@ def register(bot):
     bot.add_cog(General(bot))
     bot.add_cog(Aretard(bot))
     bot.add_cog(Trevor(bot))
-    bot.add_cog(Voice(bot))
+    if bot.config.voice_enabled:
+       bot.add_cog(Voice(bot))

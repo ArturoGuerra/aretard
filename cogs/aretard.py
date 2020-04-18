@@ -48,6 +48,12 @@ class Aretard(Plugin):
         except: pass
 
 
+    @command(name="cat")
+    async def cat(self, ctx):
+        try:
+            await ctx.send("https://i.redd.it/1e35a6ui9et41.jpg")
+        except: pass
+        
     @command(name="random")
     async def random(self, ctx):
         max_idx = len(self.randomstuffs) - 1

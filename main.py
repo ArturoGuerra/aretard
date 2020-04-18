@@ -10,12 +10,17 @@ import logging
 import uvloop
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
+sh = logging.StreamHandler()
+sh.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger = logging.getLogger('aretard')
+logger.addHandler(sh)
 logger.setLevel(logging.INFO)
+
+logger.info(f"Starting aretard :)")
+
 config = Config.Create()
 mem_store = MemStore()
 bot = Bot(config, logger, mem_store)
-
 register(bot)
 
 if __name__ == "__main__":

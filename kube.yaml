@@ -29,8 +29,28 @@ spec:
                       value: "http://lavalink:2333"
                     - name: LAVALINK_PASSWORD
                       value: "mebigboi"
+                    - name: RETARDED_SERVERS
+                      value: "572924723823116293,561030520004411412"
                     - name: TOKEN
                       valueFrom:
                         secretKeyRef:
                             name: aretard
                             key: token
+                  volumeMounts:
+                    - name: models
+                      mountPath: "/app/models"
+            volumes:
+                - name: models
+                  persistentVolumeClaim:
+                      claimName: aretard-models
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: aretard-models
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
