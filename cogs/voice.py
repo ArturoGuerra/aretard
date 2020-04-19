@@ -111,6 +111,14 @@ class Voice(Plugin):
             await self.play(ctx, query = "reee")
         except Exception as e:
             self.logger.error(e)
+
+    @command(name='chromie2')
+    @guild_only()
+    async def chromie2(self, ctx):
+        try:
+            await self.play(ctx, query = "https://i.arturonet.com/bestvideoever.mp4")
+        except Exception as e:
+            self.logger.error(e)
         
             
 
