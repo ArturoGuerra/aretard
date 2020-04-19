@@ -5,7 +5,8 @@ import discord
 class Trevor(Plugin):
     def __init__(self, bot):
         super().__init__(bot)
-        self.markov = retarder.Retard(bot.logger)
+        config = retarder.RetardConfig()
+        self.markov = retarder.Retard(bot.logger, config)
 
     @listener()
     async def on_ready(self):
@@ -21,7 +22,17 @@ class Trevor(Plugin):
             await ctx.send(message.replace('@everyone', "@ everyone").replace("@here", "@ here"))
         except Exception as e:
             self.logger.error(e)
-    
+
+    @command(name="reloadmodels", hidden=True)
+    @guild_only()
+    @is_owner()
+    async def reload(self, ctx):
+        self.markov.load_models()
+        try:
+            await ctx.send("Reloaded models..")
+        except: pass
+
+
     @command(name="newmodel", hidden=True)
     @guild_only()
     @is_owner()
