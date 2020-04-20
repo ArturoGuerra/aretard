@@ -2,16 +2,18 @@ import os
 import markovify
 from io import BytesIO
 from minio import Minio
+import threading
 
 class NotReady(Exception):
     pass
 
 class RetardConfig():
-    def __init__(self):
+    def __init__(self, prefix=None):
         self.host = os.getenv("S3_HOST")
         self.access_key = os.getenv("S3_ACCESS_KEY")
         self.secret_key = os.getenv("S3_SECRET_KEY")
         self.bucket = os.getenv("S3_BUCKET")
+        self.prefix = prefix
         self.secure = True
 
 class Retard():
@@ -32,7 +34,7 @@ class Retard():
     def __get_models_data(self):
         items = []
         
-        objects = self.minio.list_objects(self.config.bucket)
+        objects = self.minio.list_objects(self.config.bucket, prefix=self.config.prefix)
         for obj in objects:
             if not obj.is_dir and obj.object_name.endswith(".json"):
                 try:
@@ -45,24 +47,28 @@ class Retard():
         return items
 
     def load_models(self):
+        t = threading.Thread(target=self.__load_models)
+        t.start()
+
+    def __load_models(self):
         data = self.__get_models_data()
         models = None
         for m in data:
             try:
-                model = markovify.Text.from_json(m)
+                model = markovify.NewlineText.from_json(m)
                 if models:
                     models = markovify.combine(models=[models, model])
                 else:
                     models = model
             except Exception as e:
                 self.logger.error(f"Error while loading models: {e}")
+        self.logger.info(f"Done loading models {self.config.prefix}")
         self.model = models
-
 
     def add_model(self, guild, content):
         try:
-            model = markovify.Text(content, state_size=1)
-            filename = f"{guild}.json"
+            model = markovify.NewlineText(content, state_size=1)
+            filename = f"{self.config.prefix}-{guild}.json"
             bcontent = BytesIO(bytes(model.to_json(), 'utf-8'))
             size = bcontent.getbuffer().nbytes
 

@@ -5,7 +5,7 @@ import discord
 class Trevor(Plugin):
     def __init__(self, bot):
         super().__init__(bot)
-        config = retarder.RetardConfig()
+        config = retarder.RetardConfig("general")
         self.markov = retarder.Retard(bot.logger, config)
 
     @listener()
@@ -51,6 +51,9 @@ class Trevor(Plugin):
                 for m in messages:
                     if m.content != "" and self.bot.config.prefix not in m.content:
                         text += m.content + "\n"
+                    if len(m.attachments) > 0:
+                        for link in m.attachments:
+                            text += link.url + "\n"
             except Exception as e:
                 self.logger.error(e)
 

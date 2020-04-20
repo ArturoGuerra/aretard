@@ -61,3 +61,9 @@ class Aretard(Plugin):
         try:
             await ctx.send(self.randomstuffs[idx])
         except: pass
+
+    @command(name="act")
+    async def act(self, ctx):
+        try:
+            await ctx.send("https://cdn.discordapp.com/attachments/699690839688872026/701584821125775370/20181211_224539.mp4")
+        except: pass
